@@ -331,6 +331,14 @@ int count(){
 
 ## Chapter 6.4
 
+### 思考:is_prime 函数从2到n-1依次检查有没有能被n整除的数,如果有就说明n不是素数,立刻跳出循环而不执行++i。因此,如果n不是素数,则循环结束后i一定小于n,如果n是素数,则循环结束后i一定等于n。注意检查临界条件:2应该是素数,如果n是2,则循环体一次也不执行,但是i的初值就是2,也等于n,在程序中也判定为素数。其实没有必要从2一直检查到n-1,只需要从2检查到sqrt(n),全都不能整除就足以证明n是素数了,请读者想一想为什么。
+
+If a number n is not a prime, it can be factored into two factors a and b:
+```c
+n = a * b
+```
+Now a and b can't be both greater than the square root of n, since then the product a * b would be greater than sqrt(n) * sqrt(n) = n. So in any factorization of n, at least one of the factors must be smaller than the square root of n, and if we can't find any factors less than or equal to the square root, n must be a prime
+
 ### 习题1：求素数这个程序只是为了说明`break`和`continue`的用法才这么写的，其实完全可以不用`break`和`continue`，请读者修改一下控制流程，去掉`break`和`continue`而保持功能不变。
 
 ```c
