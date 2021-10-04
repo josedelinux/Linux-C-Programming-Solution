@@ -468,7 +468,108 @@ void printFunc(struct complex_struct z) {
 属于存储表示层。
 
 ### 习题2：实现一个用分子分母的格式来表示有理数的结构体`rational`以及相关的函数，`rational`结构体之间可以做加减乘除运算，运算的结果仍然是`rational`。
+My answer:
+```c
+/*
+ 习题2：实现一个用分子分母的格式来表示有理数的结构体`rational`以及相关的函数，`rational`结构体之间可以做加减乘除运算，运算的结果仍然是`rational`。
+*/
+#include<stdio.h>
+#include<stdlib.h>
 
+int getGCD(int a, int b) {
+    if(a % b == 0) {
+		return b;
+    } else {
+		return getGCD(b, a % b);
+    }
+}
+
+struct Rational{
+    int numerator ;
+    int denominator;
+};
+
+struct Rational make_rational(int numerator,int denominator){
+	struct Rational r;
+	r.numerator  = numerator ;
+	r.denominator = denominator;
+	return r;
+}
+
+void print_rational(struct Rational z){
+	if (z.denominator ==0){
+		printf("error: denominator is zero\n");
+		return;
+	}
+	if(z.numerator == 0) {
+		printf("0\n");
+		return;
+	}
+	int gcd = getGCD(abs(z.numerator), abs(z.denominator));
+	//aka z.denominator == gcd, when numerator is bigger then denominator eg 8/4 (print 2)
+	if(abs(z.denominator) / gcd == 1) {
+	printf("%d\n", z.numerator / gcd);
+	} else {
+	printf("%d/%d\n", z.numerator / gcd, z.denominator / gcd);
+	}
+}
+
+struct Rational add_rational(struct Rational a,struct Rational b){
+    struct Rational r;
+    int gcd = 0;
+    int lcm = 0;
+    gcd = getGCD(a.denominator,b.denominator);
+    lcm = abs(a.denominator * b.denominator) / gcd;
+    r.numerator = a.numerator * lcm / a.denominator + b.numerator * lcm /b.denominator;
+    r.denominator = lcm;
+    return r;
+}
+
+struct Rational sub_rational(struct Rational a,struct Rational b){
+    struct Rational r;
+    int gcd = 0;
+    int lcm = 0;
+    gcd = getGCD(a.denominator,b.denominator);
+    lcm = abs(a.denominator * b.denominator) / gcd;
+    r.numerator = a.numerator * lcm / a.denominator - b.numerator * lcm /b.denominator;
+    r.denominator = lcm;
+    return r;
+}
+
+struct Rational mul_rational(struct Rational a, struct Rational b) {
+    struct Rational r;
+    int numerator = a.numerator * b.numerator;
+    int denominator = a.denominator * b.denominator;
+    r.numerator = numerator;
+    r.denominator = denominator;
+    return r;
+}
+
+struct Rational div_rational(struct Rational a, struct Rational b) {
+    struct Rational r;
+    int numerator = a.numerator * b.denominator;
+    int denominator = a.denominator * b.numerator;
+    r.numerator = numerator;
+    r.denominator = denominator;
+    return r;
+}
+
+int main(void)
+{
+    struct Rational a = make_rational(1, 8); /* a=1/8 */
+    struct Rational b = make_rational(-2, 8); /* b=-1/8 */
+	print_rational(b);
+	//printf("debug:%d/%d\n",b.numerator,b.denominator);
+    print_rational(add_rational(a, b));
+    print_rational(sub_rational(a, b));
+	//print_rational(sub_rational(b, a));
+    print_rational(mul_rational(a, b));
+    print_rational(div_rational(a, b));
+	struct Rational c = div_rational(a, b);
+	printf("debug:%d/%d\n",c.numerator,c.denominator);
+}
+
+```
 ```c
 #include <stdio.h>
 struct Rational {
