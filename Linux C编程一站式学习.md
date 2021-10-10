@@ -918,7 +918,7 @@ A：能，先对数组进行一次快排，将数组分成三个部分：[start,
 
 (by josedelinux)
 A:用indexof_excep()去排除某项
-'''c
+```c
 #include <stdio.h>
 
 char a[]="hello world";
@@ -941,7 +941,7 @@ int main(void)
 	printf("%d %d\n", indexof_excep('o',-1),indexof_excep('o',indexof_excep('o',-1)));
 	return 0;
 }
-'''
+```
 
 
 ### 习题3：进一步泛化，在一组随机排列的数中找出第k小的，这个元素称为k-th Order Statistic。能想到的最直观的算法肯定是先把这些数排序然后取第k个，时间复杂度和排序算法相同，可以是Θ(nlgn)。这个问题虽然比前两个问题复杂，但它也有平均情况下时间复杂度是Θ(n)的算法，将上一节习题1的快速排序算法稍加修改就可以解决这个问题：
