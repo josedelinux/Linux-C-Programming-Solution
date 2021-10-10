@@ -916,6 +916,32 @@ A：没有比O(n)更快的算法了，因为数组无序，要找到最小值，
 
 A：能，先对数组进行一次快排，将数组分成三个部分：[start, pivot - 1]，[pivot]，[pivot + 1, end]，然后比较目标值与pivot的大小，若小于pivot，则仅需在前一半中查找，同理若大于，则在后一半中查找，时间复杂度为，每次递归查找的数量都是上一次的一半，即：$n + \frac{n}{2} + \frac{n}{4}  + ... 1 = 2n - 1$ ，即时间复杂度为$O(n)$
 
+(by josedelinux)
+A:用indexof_excep()去排除某项
+'''c
+#include <stdio.h>
+
+char a[]="hello world";
+
+//exception == -1 : no excep
+int indexof_excep(char letter,int excep)
+{
+	int i = 0;
+	while (a[i] != '\0') {
+		if (a[i] == letter && excep != i)
+			return i;
+		i++;
+	}
+	return -1;
+}
+
+int main(void)
+{
+    printf("%d\n",indexof_excep('z',-1));
+	printf("%d %d\n", indexof_excep('o',-1),indexof_excep('o',indexof_excep('o',-1)));
+	return 0;
+}
+'''
 
 
 ### 习题3：进一步泛化，在一组随机排列的数中找出第k小的，这个元素称为k-th Order Statistic。能想到的最直观的算法肯定是先把这些数排序然后取第k个，时间复杂度和排序算法相同，可以是Θ(nlgn)。这个问题虽然比前两个问题复杂，但它也有平均情况下时间复杂度是Θ(n)的算法，将上一节习题1的快速排序算法稍加修改就可以解决这个问题：
