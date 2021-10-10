@@ -917,6 +917,7 @@ A：没有比O(n)更快的算法了，因为数组无序，要找到最小值，
 A：能，先对数组进行一次快排，将数组分成三个部分：[start, pivot - 1]，[pivot]，[pivot + 1, end]，然后比较目标值与pivot的大小，若小于pivot，则仅需在前一半中查找，同理若大于，则在后一半中查找，时间复杂度为，每次递归查找的数量都是上一次的一半，即：$n + \frac{n}{2} + \frac{n}{4}  + ... 1 = 2n - 1$ ，即时间复杂度为$O(n)$
 
 (by josedelinux)
+
 A:用indexof_excep()去排除某项
 ```c
 #include <stdio.h>
