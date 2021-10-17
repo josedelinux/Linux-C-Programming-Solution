@@ -1051,6 +1051,17 @@ double mypow(double x, int n) {
 }
 ```
 
+## Chapter 12.3
+
+### 习题1: 修改本节的程序，要求从起点到终点正向打印路线。你能想到几种办法？
+A: 1逆向print stack
+cf: https://www.geeksforgeeks.org/reverse-a-stack-using-recursion/
+
+
+### 习题2: 本节程序中predecessor这个数据结构占用的存储空间太多了，改变它的存储方式可以节省空间，想想该怎么改。
+
+A: 计算出row*MAX_ROW+col,把结果保存到predecessor数组,可节省一半的存储,需要座标
+时可以用/MAX_ROW和%MAX_ROW运算把row和col分离出来
 
 
 ## Chapter 14.2
